@@ -1,7 +1,7 @@
-const { createSession } = require("../model/session.js");
-const { createUser } = require("../model/user.js");
-const { Layout } = require("../templates.js");
 const bcrypt = require("bcryptjs");
+const { createUser } = require("../model/user.js");
+const { createSession } = require("../model/session.js");
+const { Layout } = require("../templates.js");
 
 function get(req, res) {
   const title = "Create an account";

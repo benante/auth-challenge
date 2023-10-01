@@ -35,20 +35,20 @@ function post(req, res) {
   bcrypt.compare(password, user.hash).then((match) => {
     //  [2] If no match redirect back to same page so user can retry
     if (!match) {
-      return res.status(400).res("<h1>Login failed</h1>");
+      return res.status(400).send("<h1>Login failed</h1>");
     } else {
       //  [3] If match create a session with their user ID,
       const session_id = createSession(user.id);
       //  [4] set a cookie with the session ID,
       res.cookie("sid", session_id, {
         signed: true,
-        maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
+        maxAge: 1000 * 60 * 60 * 24 * 7,
         sameSite: "lax",
         httpOnly: true,
       });
+      //  [5] redirect to the user's confession page (e.g. /confessions/3)
+      res.redirect(`/confessions/${user.id}`);
     }
-    //  [5] redirect to the user's confession page (e.g. /confessions/3)
-    res.redirect(`/confessions/${user.id}`);
   });
 }
 
