@@ -1,7 +1,6 @@
 const db = require("../database/db.js");
 const crypto = require("node:crypto");
 
-// RETURNING THE ID IN THE SQL STATEMENT AT THE MOMENT. I changed the create session from "run " to "get"
 const insert_session = db.prepare(/*sql*/ `
   INSERT INTO sessions ( user_id, expires_at)
   VALUES ( $user_id, DATE('now', '+7 days') )
